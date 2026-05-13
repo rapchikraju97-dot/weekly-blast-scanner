@@ -2,9 +2,8 @@ name: Weekly Blast Scanner
 
 on:
   schedule:
-    # Every Saturday at 7:00 AM IST (1:30 AM UTC)
-    - cron: "30 1 * * 6"
-  workflow_dispatch:   # manual trigger from GitHub UI
+    - cron: "30 1 * * 6"   # Saturday 7 AM IST
+  workflow_dispatch:
 
 jobs:
   scan:
@@ -12,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
@@ -31,7 +30,7 @@ jobs:
           python weekly_blast_scanner.py
 
       - name: Upload results CSV
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: blast-setups
           path: "*.csv"
